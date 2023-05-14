@@ -1,26 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movimientos</title>
-    <link rel="stylesheet" href="/static/css/pico.css">
-    <link rel="stylesheet" href="/static/css/styles.css">
-</head>
-<body>
-    <header>
-        <div class="container">
-            Cripto move
-        </div>
-    </header>
-    <section>
-        <h2>Here is section block</h2>
-    </section>
-    <footer>
-        <div class="container">
-            &copy; 2020 Todos los derechos reservados
-        </div>
-    </footer>
-</body>
-</html>
+{% extends "base.html" %}
+{% block pageBase %}
+    <h1>My cryptocurrency trades</h1>
+    <table style="width:100%">
+        <thead> 
+            <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>From</th>
+                <th>Q</th>
+                <th>To</th>
+                <th>Q</th>
+                <th>PU</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for item in data %}
+            <tr>                
+                <td>{{item.date}}</td>
+                <td>{{item.time}}</td>
+                <td>{{item.from}}</td>
+                <td>{{item.q}}</td>
+                <td>{{item.to}}</td>
+                <td>{{item.q1}}</td>
+                <td>{{item.PU}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+  {% endblock %}
