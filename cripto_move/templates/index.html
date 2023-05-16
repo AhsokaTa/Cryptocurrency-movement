@@ -1,6 +1,19 @@
 {% extends "base.html" %}
 {% block pageBase %}
-    <h1>My cryptocurrency trades</h1>
+
+    <h2>response about resquests</h2>
+    <h1>{{msg}}</h1>
+    <ul>
+        
+            <li>JSON response : {{r_JSON}}</li>
+            <li>JSON time : {{r_JSON.time}}</li>
+            <li>JSON asset_id_base : {{r_JSON.asset_id_base}}</li>
+            <li>JSON asset_id_quote : {{r_JSON.asset_id_quote}}</li>
+            <li>JSON rate : {{r_JSON.rate}}</li>
+       
+    </ul>      
+
+
     <table style="width:100%">
         <thead> 
             <tr>

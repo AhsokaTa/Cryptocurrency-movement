@@ -1,5 +1,7 @@
 from cripto_move import app
 from flask import render_template
+import requests
+from cripto_move.models import *
 
 
 @app.route("/")
@@ -15,8 +17,19 @@ def index():
     "q1": 'q1 field',
     "PU": 'P.U field'
     } 
-      ]  
-    return render_template("index.html", data = JSONstructure)
+    ]  
+
+    crypto_from='BTC'
+    crypto_to='EUR'
+    api_key = "93D86494-DCE3-4077-A9F4-5C36C1D86E34"
+
+    cyptocurrencies = CoinApiIO()
+    mesage=cyptocurrencies.GetCryptocurrencies()
+    response=requests.get(f'https://rest.coinapi.io/v1/exchangerate/{crypto_from}/{crypto_to}?apikey={api_key}')
+    #if status code !=200, sino saco error
+    resp_JSON=response.json()
+
+    return render_template("index.html", data = JSONstructure,r_JSON=resp_JSON,msg=mesage)
 
 @app.route("/purchase")
 def purchase():
