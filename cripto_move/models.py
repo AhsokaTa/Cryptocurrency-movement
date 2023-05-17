@@ -1,4 +1,5 @@
 
+
 class ModelError(Exception):
     pass
 
@@ -9,3 +10,5 @@ class CoinApiIO:
     def GetCryptocurrencies(self):
         self.message = "hello world"
         return self.message
+
+

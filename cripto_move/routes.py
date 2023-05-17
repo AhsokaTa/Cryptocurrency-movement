@@ -2,6 +2,7 @@ from cripto_move import app
 from flask import render_template
 import requests
 from cripto_move.models import *
+from cripto_move.database import *
 
 
 @app.route("/")
@@ -28,8 +29,8 @@ def index():
     response=requests.get(f'https://rest.coinapi.io/v1/exchangerate/{crypto_from}/{crypto_to}?apikey={api_key}')
     #if status code !=200, sino saco error
     resp_JSON=response.json()
-
-    return render_template("index.html", data = JSONstructure,r_JSON=resp_JSON,msg=mesage)
+    register = select_all()
+    return render_template("index.html", data = JSONstructure,r_JSON=resp_JSON,msg=mesage, reg=register)
 
 @app.route("/purchase")
 def purchase():
