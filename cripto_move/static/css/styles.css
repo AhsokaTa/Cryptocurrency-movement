@@ -3,6 +3,7 @@ header,footer{
     color: var(--primary-inverse);
     font-size: 1.4em;
     font-weight: bold;
+    
 } 
 
 body{
@@ -24,15 +25,7 @@ ul.flashes{
     font-size: 0.9em;
 }
 
-
-.fixed-anchor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: #a50b0b;
-    padding: 10px;
-    z-index: 9999;
-}
-.fixed-anchor a {
-    margin-right: 10px;
+.container a {
+    color: #ffb300;
+    font-weight: bold;
 }

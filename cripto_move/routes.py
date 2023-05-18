@@ -7,6 +7,7 @@ from cripto_move.database import *
 
 @app.route("/")
 def index():
+    """
     JSONstructure = [
     {
     "id": '1',
@@ -19,6 +20,7 @@ def index():
     "PU": 'P.U field'
     } 
     ]  
+    """
 
     crypto_from='BTC'
     crypto_to='EUR'
@@ -30,7 +32,7 @@ def index():
     #if status code !=200, sino saco error
     resp_JSON=response.json()
     register = select_all()
-    return render_template("index.html", data = JSONstructure,r_JSON=resp_JSON,msg=mesage, reg=register)
+    return render_template("index.html", r_JSON=resp_JSON,msg=mesage, reg=register)
 
 @app.route("/purchase")
 def purchase():
