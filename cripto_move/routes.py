@@ -5,7 +5,7 @@ from cripto_move.models import *
 from cripto_move.database import *
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def index():
     """
     JSONstructure = [

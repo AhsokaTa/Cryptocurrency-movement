@@ -1,12 +1,13 @@
 import sqlite3
 from cripto_move import ORIGIN_DATA
+from cripto_move.conexion import Conexion
 
 def select_all():
-    con = sqlite3.connect(ORIGIN_DATA)
-    cur = con.cursor()
-    res = cur.execute("select * from movements")
-    rows = res.fetchall()
-    col = res.description
+    connect_to=Conexion("select * from movements")
+
+
+    rows = connect_to.res.fetchall()
+    col = connect_to.res.description
 
     #objetivo crear una lista de diccionario con filas y columnas
     dictionary_list = []
@@ -19,6 +20,6 @@ def select_all():
             position += 1
         dictionary_list.append(diccionary)
     
-    con.close()
+    connect_to.con.close()
 
     return dictionary_list
