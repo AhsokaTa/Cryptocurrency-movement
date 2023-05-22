@@ -3,37 +3,44 @@
 
 <h1>Purchase of cryptocurrencies</h1>
 <div style="display: flex; justify-content: space-between;">
-    <div style="width: 30%;">
+    <div style="width: 50%;">
       <form action="form1">
-               
-        <label for="from">From</label>
-          <select id="from_to" name="from_to" required>  
-            <option value="0">EUR</option>
-            {# if base de datos hay monedas, #}
-            {# Aquí hago un for #}                
-          </select>   
 
-          <label for="q" style="display: flex; align-items: center;"> Q
-            
+        <div class="grid">
+          <div> 
+            <label for="from">From</label>
+            <select id="from_to" name="from_to" required>  
+              <option value="0">EUR</option>
+              {# if base de datos hay monedas, #}
+              {# Aquí hago un for #}                
+            </select>   
+  
+            <label for="q" > Q  <br>
             <input type="text" id="q" name="q" placeholder="Q" required>
-          </label>
+            </label>
+          </div>
+          <div>
+          
+            <label for="to">To</label>
+            <select id="to" name="to" required>           
+              {% for item in crypto_diccion %}
+                <option value="{{item.id}}">{{item.name}}</option>
+              {% endfor %}                   
+            </select>              
+            
 
+            <label for="lastname">_________________ </label>
+  
+          </div>
+        </div>
+               
+       
           <button style="margin-left: 20px; width: 40px; height: 40px;">C</button>
          
-
+      
     </div>
 
-    <div style="width: 30%;">
-          <label for="to">To</label>
-          <select id="to" name="to" required>           
-            {% for item in crypto_diccion %}
-              <option value="{{item.id}}">{{item.name}}</option>
-            {% endfor %}                   
-          </select>  
-
-        
-      </form>
-    </div>
+    </form>
 </div>
 
 {% endblock %}

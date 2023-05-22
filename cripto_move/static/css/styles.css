@@ -3,7 +3,8 @@ header,footer{
     color: var(--primary-inverse);
     font-size: 1.4em;
     font-weight: bold;
-    
+    height: 30%;
+    padding-top: 1%;
 } 
 
 body{
