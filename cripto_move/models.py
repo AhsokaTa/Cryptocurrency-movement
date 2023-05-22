@@ -4,8 +4,8 @@ class ModelError(Exception):
     pass
 
 class CoinApiIO:
-    def __init__(self):
-        self.cryptocurrency_list = ["EUR","ETH","BNB","ADA","DOT","BTC","USDT","XRP","SOL","MATIC"]
+    def __init__(self,crypto_list):
+        self.cryptocurrency_list = crypto_list
         self.crypto_list=[]
     
     def GetCryptocurrencies(self, API_key):
