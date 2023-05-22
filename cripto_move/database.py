@@ -5,7 +5,6 @@ from cripto_move.conexion import Conexion
 def select_all():
     connect_to=Conexion("select * from movements")
 
-
     rows = connect_to.res.fetchall()
     col = connect_to.res.description
 
