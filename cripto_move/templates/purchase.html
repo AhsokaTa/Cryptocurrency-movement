@@ -2,44 +2,42 @@
 {% block pageBase %}
 
 <h1>Purchase of cryptocurrencies</h1>
+
 <div style="display: flex; justify-content: space-between;">
     <div style="width: 50%;">
-      <form action="form1">
+      <form action="/form1">
 
         <div class="grid">
           <div> 
             <label for="from">From</label>
             <select id="from_to" name="from_to" required>  
               <option value="0">EUR</option>
-              {# if base de datos hay monedas, #}
-              {# Aquí hago un for #}                
-            </select>   
-  
+                {% if exist %}        
+                  {% for item in reg %}
+                    <option value="{{item.id}}">{{item.moneda_from}}</option>                
+                  {% endfor %}       
+                {% endif %}   
+
+
+               
+            </select>     
             <label for="q" > Q  <br>
             <input type="text" id="q" name="q" placeholder="Q" required>
             </label>
           </div>
-          <div>
-          
+          <div>          
             <label for="to">To</label>
             <select id="to" name="to" required>           
-              {% for item in crypto_diccion %}
+              {% for item in all_cryp %}
                 <option value="{{item.id}}">{{item.name}}</option>
               {% endfor %}                   
-            </select>              
-            
-
-            <label for="lastname">_________________ </label>
-  
+            </select>        
+              <div> <label for="Q_to">Q :  _________________ </label></div>
+              <div> <label for="PU">P.U. _________________ </label></div>
           </div>
-        </div>
-               
-       
-          <button style="margin-left: 20px; width: 40px; height: 40px;">C</button>
-         
-      
+        </div>             
+            <button style="margin-left: 20px; width: 40px; height: 40px;">C</button>             
     </div>
-
     </form>
 </div>
 

@@ -26,3 +26,6 @@ def select_all():
         connect_to.con.close()
 
         return dictionary_list
+    
+
+    
