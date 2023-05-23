@@ -2,9 +2,9 @@
 {% block pageBase %}
 
 <h1>Purchase of cryptocurrencies</h1>
-
+{{rat}}
 <div style="display: flex; justify-content: space-between;">
-    <div style="width: 50%;">
+    <div style="width: 90%;">
       <form action="/form1">
 
         <div class="grid">
@@ -17,8 +17,6 @@
                     <option value="{{item.id}}">{{item.moneda_from}}</option>                
                   {% endfor %}       
                 {% endif %}   
-
-
                
             </select>     
             <label for="q" > Q  <br>
@@ -32,11 +30,12 @@
                 <option value="{{item.id}}">{{item.name}}</option>
               {% endfor %}                   
             </select>        
-              <div> <label for="Q_to">Q :  _________________ </label></div>
-              <div> <label for="PU">P.U. _________________ </label></div>
+              <div> <label for="Q_to">  Q :  _________________ </label></div>
+              <div> <label for="PU">   P.U: _________________ </label></div>
+              <div>  <button style="margin-left: 20px; width: 70px; height: 70px;">OK</button>  </div>
           </div>
         </div>             
-            <button style="margin-left: 20px; width: 40px; height: 40px;">C</button>             
+            <button style="margin-left: 20px; width: 70px; height: 70px;">C</button>             
     </div>
     </form>
 </div>

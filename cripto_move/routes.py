@@ -2,8 +2,8 @@ from cripto_move import app
 from flask import render_template
 from cripto_move.models import *
 from cripto_move.database import *
+from config import API_key
 
-API_key ="93D86494-DCE3-4077-A9F4-5C36C1D86E34"
 crypt_dic = [
     {"id" : 0, "name" : "EUR"},
     {"id" : 1, "name" : "BTC"},
@@ -32,23 +32,27 @@ my_crypt=select_all()
 def index():
 
     cryptocurrencies = CoinApiIO(crypt_dic)    
-    cryptocurrencies.GetCryptocurrencies(API_key)
+    cryptocurrencies.getCryptocurrencies(API_key)
     
     register = select_all()
     if not register:  
         return render_template("index.html", message="empty record")
     else:
         return render_template("index.html", reg=register)
+    #return jsonify()
 
 @app.route("/purchase", methods=["GET", "POST"])
 def purchase():       
-    #consulta de api
-    #me falta coger las de la base de datos
+    #consulta de api    
+    
+    cryptocurrencies = CoinApiIO(crypt_dic)    
+    rate = cryptocurrencies.crytocurrenciesValue("BTC")
+    
     register = select_all()
     if not register:
         return render_template("purchase.html", all_cryp = all_crypt, exist = False)
     else :       
-        return render_template("purchase.html", all_cryp = all_crypt, reg=register, exist = True)
+        return render_template("purchase.html", all_cryp = all_crypt, reg=register, exist = True,rat=rate)
 
 @app.route("/status")
 def status():
