@@ -46,13 +46,13 @@ def purchase():
     #consulta de api    
     
     cryptocurrencies = CoinApiIO(crypt_dic)    
-    rate = cryptocurrencies.crytocurrenciesValue("BTC")
+    rate = cryptocurrencies.crytocurrenciesValue("BTC",API_key)
     
     register = select_all()
     if not register:
-        return render_template("purchase.html", all_cryp = all_crypt, exist = False)
+        return render_template("purchase.html", all_cryp = all_crypt)
     else :       
-        return render_template("purchase.html", all_cryp = all_crypt, reg=register, exist = True,rat=rate)
+        return render_template("purchase.html", all_cryp = all_crypt, reg=register,rat=rate)
 
 @app.route("/status")
 def status():
