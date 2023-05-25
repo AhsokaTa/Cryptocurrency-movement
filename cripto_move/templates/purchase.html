@@ -2,42 +2,48 @@
 {% block pageBase %}
 
 <h1>Purchase of cryptocurrencies</h1>
-{{rat}}
+{{resp_request}}
+<br>fromselect   -> {{resp_request.from_select}}
+<br>from input q -> {{resp_request.from_input_q}}
+<br>to select    -> {{resp_request.to_select}}
+<br>to label q   -> {{resp_request.to_labl_q}}
+<br>to label pu  -> {{resp_request.to_label_pu}} <br>
+
 <div style="display: flex; justify-content: space-between;">
     <div style="width: 90%;">
-      <form action="/form1">
+        <form action="/purchase" method="POST">
+            <div class="grid">
+                <div>
+                    <label for="from">From</label>
+                    <select name="from_select" value="{{resp_request.from_select}}">
+                        <option value="0">EUR</option>
+                        {% if exist %}        
+                            {% for item in reg %}
+                                <option value="{{ item.id }}">{{ item.moneda_from }}</option>                
+                            {% endfor %}       
+                        {% endif %}   
+                    </select>     
+                    <label for="q">Q</label><br>
+                    <input type="text" name="from_input_q" value="{{resp_request.from_input_q}}" placeholder="Insert money" required>
+                </div>
+                <div>          
+                    <label for="to">To</label>
+                    <select name="to_select" value="{{resp_request.to_select}}" required>           
+                        {% for item in all_cryp %}
+                            <option value="{{ item.name }}">{{ item.name }}</option>
+                        {% endfor %}                   
+                    </select>        
+                    <br>
+                    
+                    Q: __<label name="to_labl_q" value="{{resp_request.to_labl_q}}"></label><br>
+                    P.U: __<div><label  name="to_label_pu" value="{{resp_request.to_label_pu}}"></label></div>
 
-        <div class="grid">
-          <div> 
-            <label for="from">From</label>
-            <select id="from_to" name="from_to" required>  
-              <option value="0">EUR</option>
-                {% if exist %}        
-                  {% for item in reg %}
-                    <option value="{{item.id}}">{{item.moneda_from}}</option>                
-                  {% endfor %}       
-                {% endif %}   
-               
-            </select>     
-            <label for="q" > Q  <br>
-            <input type="text" id="q" name="q" placeholder="Q" required>
-            </label>
-          </div>
-          <div>          
-            <label for="to">To</label>
-            <select id="to" name="to" required>           
-              {% for item in all_cryp %}
-                <option value="{{item.id}}">{{item.name}}</option>
-              {% endfor %}                   
-            </select>        
-              <div> <label for="Q_to">  Q :  _________________ </label></div>
-              <div> <label for="PU">   P.U: _________________ </label></div>
-              <div>  <button style="margin-left: 20px; width: 70px; height: 70px;">OK</button>  </div>
-          </div>
-        </div>             
-            <button style="margin-left: 20px; width: 70px; height: 70px;">C</button>             
+                    <div><input type="submit" name="button" value="save" style="margin-left: 20px; width: 70px; height: 70px;"></div>
+                </div>
+            </div>             
+            <input type="submit" name="button" value="calculate" style="margin-left: 20px; width: 70px; height: 70px;">
+        </form>
     </div>
-    </form>
 </div>
 
 {% endblock %}
