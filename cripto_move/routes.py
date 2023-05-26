@@ -1,14 +1,15 @@
 from cripto_move import app
 from flask import render_template, request
 from cripto_move.models import *
-from cripto_move.database import *
+from cripto_move.conexion import *
+
 from config import API_key
 
 @app.route("/", methods=["GET"])
-def index():      
+def index():    
         
     #take the ones from database
-    my_crypt_register = select_all()
+    my_crypt_register =Conexion.select_all()     
 
     if not my_crypt_register:  
         return render_template("index.html", message="empty record")
@@ -23,12 +24,12 @@ def purchase():
     all_crypt = ["EUR","BTC","ETH","USDT", "BNB" , "XRP" , "ADA", "SOL", "DOT", "MATIC"]
 
     #register, my cryptocurrencies in dictionary format (as it is returned)
-    register = select_all() 
+    my_crypt_register = Conexion.select_all() 
     
     #save my cryptocurrencies from the database into the list my_cripto
     my_crypto = []
     for currency in all_crypt:
-        for crypto in register:
+        for crypto in my_crypt_register:
             if currency == crypto["moneda_to"]:
                 my_crypto.append(currency)
 
@@ -40,7 +41,7 @@ def purchase():
     respuesta= {}
 
     if request.method == "GET":
-        return render_template ("purchase.html", all_cryp = all_crypt,my_cripto=my_crypto, mis_cripto=my_cryptocurrencies, register=register, rat=0.2, resp_request = respuesta, pre_to="")
+        return render_template ("purchase.html", all_cryp = all_crypt,my_cripto=my_crypto, mis_cripto=my_cryptocurrencies, register=my_crypt_register, rat=0.2, resp_request = respuesta, pre_to="")
     else :
         if request.form['button'] == 'calculate' : 
             q = 000.75666
