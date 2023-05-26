@@ -8,7 +8,9 @@
 <br>to select    -> {{resp_request.to_select}}
 <br>to label q   -> {{resp_request.to_labl_q}}
 <br>to label pu  -> {{resp_request.to_label_pu}} <br>
-{{all_cryp}}
+<br>Todas las cripto son {{all_cryp}} <br>
+<br> mis cripto son : {{my_cripto}}
+
 <div style="display: flex; justify-content: space-between;">
     <div style="width: 90%;">
         <form action="/purchase" method="POST">
@@ -16,12 +18,10 @@
                 <div>
                     <label for="from">From</label>
                     <select name="from_select">
-                        <option value="0">EUR</option>
-                        {% if exist %}        
-                            {% for item in reg %}
-                                <option value="{{ item.id }}">{{ item.moneda_from }}</option>                
-                            {% endfor %}       
-                        {% endif %}   
+                        <option value="0">EUR</option>                             
+                            {% for item in my_cripto %}
+                                <option value="{{ item }}">{{ item }}</option>                
+                            {% endfor %}                                 
                     </select>     
                     <label for="q">Q</label><br>
                     <input type="text" name="from_input_q" placeholder="Insert money" required value="{{resp_request.from_input_q}}">
@@ -35,14 +35,12 @@
                         {% endfor %}                   
                         <option value="{{ pre_to }}" required >{{ pre_to }}</option>
                     </select>        
-                    <br>
-                    
+                    <br>                  
                    
                     Q __<span>{{ resp_request.to_labl_q }}</span><br>
                     P.U: __<span>{{ resp_request.to_label_pu }}</span><br>
 
-                    <div><input type="submit" name="button" value="save" style="margin-left: 20px; width: 70px; height: 70px;"></div>
-                    
+                    <div><input type="submit" name="button" value="save" style="margin-left: 20px; width: 70px; height: 70px;"></div>                    
                   </div>
             </div>             
             <input type="submit" name="button" value="calculate" style="margin-left: 20px; width: 70px; height: 70px;">

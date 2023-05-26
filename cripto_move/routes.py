@@ -4,57 +4,43 @@ from cripto_move.models import *
 from cripto_move.database import *
 from config import API_key
 
-crypt_dic = [
-    {"id" : 0, "name" : "EUR"},
-    {"id" : 1, "name" : "BTC"},
-    {"id" : 2, "name" : "ETH"},
-    {"id" : 3, "name" : "ADA"}
-]
-
-all_crypt = ["EUR","BTC","ETH","USDT", "BNB" , "XRP" , "ADA", "SOL", "DOT", "MATIC"]
-
-my_crypt=[]
-my_crypt=select_all()
-
-#crear diccionario con las cripto totales
-#crear un diccionario con las cripto que tnego en base de datos 
-
 @app.route("/", methods=["GET"])
-def index():
+def index():      
+        
+    #take the ones from database
+    my_crypt_register = select_all()
 
-    cryptocurrencies = CoinApiIO(all_crypt)    
-    #cryptocurrencies.getCryptocurrencies(API_key)
-    
-    register = select_all()
-    if not register:  
+    if not my_crypt_register:  
         return render_template("index.html", message="empty record")
     else:
-        return render_template("index.html", reg=register)
-    #return jsonify()
+        return render_template("index.html", reg=my_crypt_register)
+    
 
 @app.route("/purchase", methods=["GET","POST"])
-def purchase():       
-    #consulta de api    
+def purchase():      
 
+    #all the cryptocurrencies 
     all_crypt = ["EUR","BTC","ETH","USDT", "BNB" , "XRP" , "ADA", "SOL", "DOT", "MATIC"]
-    
-    cryptocurrencies = CoinApiIO(crypt_dic)    
 
-    """
-    register = select_all()
-    if not register:
-        return render_template("purchase.html", all_cryp = all_crypt)
-    else :       
-        return render_template("purchase.html", all_cryp = all_crypt, reg=register,rat=rate)
-    """ 
-
-    #rate = cryptocurrencies.crytocurrenciesValue("BTC" , API_key)
+    #register, my cryptocurrencies in dictionary format (as it is returned)
+    register = select_all() 
     
-    register = select_all()  
+    #save my cryptocurrencies from the database into the list my_cripto
+    my_crypto = []
+    for currency in all_crypt:
+        for crypto in register:
+            if currency == crypto["moneda_to"]:
+                my_crypto.append(currency)
+
+###########################################################################################################
+                           
+    cryptocurrencies = CoinApiIO(all_crypt)   
+    my_cryptocurrencies = cryptocurrencies.getCryptocurrencies(API_key) #todas las cripto
+    
     respuesta= {}
 
     if request.method == "GET":
-        return render_template ("purchase.html", all_cryp = all_crypt, reg=register, rat=0.2, resp_request = respuesta, pre_to="")
+        return render_template ("purchase.html", all_cryp = all_crypt,my_cripto=my_crypto, mis_cripto=my_cryptocurrencies, register=register, rat=0.2, resp_request = respuesta, pre_to="")
     else :
         if request.form['button'] == 'calculate' : 
             q = 000.75666
@@ -69,7 +55,6 @@ def purchase():
             }
 
             all_crypt = ["EUR","BTC","ETH","USDT", "BNB" , "XRP" , "ADA", "SOL", "DOT", "MATIC"]
-
 
             return render_template('purchase.html',resp_request = respuesta, all_crypt=all_crypt, pre_to=request.form['to_select'])
         else :

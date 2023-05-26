@@ -15,6 +15,7 @@ class CoinApiIO:
         if response.status_code != 200:
             raise Exception("Error response code")
         
+        full_list = []
         full_list = response.json()
 
         for item in full_list:
