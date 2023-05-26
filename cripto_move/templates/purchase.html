@@ -8,14 +8,14 @@
 <br>to select    -> {{resp_request.to_select}}
 <br>to label q   -> {{resp_request.to_labl_q}}
 <br>to label pu  -> {{resp_request.to_label_pu}} <br>
-
+{{all_cryp}}
 <div style="display: flex; justify-content: space-between;">
     <div style="width: 90%;">
         <form action="/purchase" method="POST">
             <div class="grid">
                 <div>
                     <label for="from">From</label>
-                    <select name="from_select" value="{{resp_request.from_select}}">
+                    <select name="from_select">
                         <option value="0">EUR</option>
                         {% if exist %}        
                             {% for item in reg %}
@@ -24,22 +24,26 @@
                         {% endif %}   
                     </select>     
                     <label for="q">Q</label><br>
-                    <input type="text" name="from_input_q" value="{{resp_request.from_input_q}}" placeholder="Insert money" required>
+                    <input type="text" name="from_input_q" placeholder="Insert money" required value="{{resp_request.from_input_q}}">
                 </div>
                 <div>          
                     <label for="to">To</label>
-                    <select name="to_select" value="{{resp_request.to_select}}" required>           
+                    <select name="to_select" value="{{ resp_request.to_select }}" required>                     
+    
                         {% for item in all_cryp %}
-                            <option value="{{ item.name }}">{{ item.name }}</option>
+                            <option value="{{ item }}" required >{{ item }}</option>
                         {% endfor %}                   
+                        <option value="{{ pre_to }}" required >{{ pre_to }}</option>
                     </select>        
                     <br>
                     
-                    Q: __<label name="to_labl_q" value="{{resp_request.to_labl_q}}"></label><br>
-                    P.U: __<div><label  name="to_label_pu" value="{{resp_request.to_label_pu}}"></label></div>
+                   
+                    Q __<span>{{ resp_request.to_labl_q }}</span><br>
+                    P.U: __<span>{{ resp_request.to_label_pu }}</span><br>
 
                     <div><input type="submit" name="button" value="save" style="margin-left: 20px; width: 70px; height: 70px;"></div>
-                </div>
+                    
+                  </div>
             </div>             
             <input type="submit" name="button" value="calculate" style="margin-left: 20px; width: 70px; height: 70px;">
         </form>

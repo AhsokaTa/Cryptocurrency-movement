@@ -10,29 +10,20 @@ crypt_dic = [
     {"id" : 2, "name" : "ETH"},
     {"id" : 3, "name" : "ADA"}
 ]
-all_crypt = [
-    {"id" : 0, "name" : "EUR"},
-    {"id" : 1, "name" : "BTC"},
-    {"id" : 2, "name" : "ETH"},
-    {"id" : 3, "name" : "USDT"},
-    {"id" : 4, "name" : "BNB"},
-    {"id" : 5, "name" : "XRP"},
-    {"id" : 6, "name" : "ADA"},
-    {"id" : 7, "name" : "SOL"},
-    {"id" : 8, "name" : "DOT"},
-    {"id" : 9, "name" : "MATIC"}
-]
+
+all_crypt = ["EUR","BTC","ETH","USDT", "BNB" , "XRP" , "ADA", "SOL", "DOT", "MATIC"]
 
 my_crypt=[]
 my_crypt=select_all()
 
 #crear diccionario con las cripto totales
 #crear un diccionario con las cripto que tnego en base de datos 
+
 @app.route("/", methods=["GET"])
 def index():
 
-    cryptocurrencies = CoinApiIO(crypt_dic)    
-    cryptocurrencies.getCryptocurrencies(API_key)
+    cryptocurrencies = CoinApiIO(all_crypt)    
+    #cryptocurrencies.getCryptocurrencies(API_key)
     
     register = select_all()
     if not register:  
@@ -44,10 +35,11 @@ def index():
 @app.route("/purchase", methods=["GET","POST"])
 def purchase():       
     #consulta de api    
+
+    all_crypt = ["EUR","BTC","ETH","USDT", "BNB" , "XRP" , "ADA", "SOL", "DOT", "MATIC"]
     
     cryptocurrencies = CoinApiIO(crypt_dic)    
 
-    rate = cryptocurrencies.crytocurrenciesValue("BTC",API_key)
     """
     register = select_all()
     if not register:
@@ -56,30 +48,32 @@ def purchase():
         return render_template("purchase.html", all_cryp = all_crypt, reg=register,rat=rate)
     """ 
 
-    rate = cryptocurrencies.crytocurrenciesValue("BTC" , API_key)
+    #rate = cryptocurrencies.crytocurrenciesValue("BTC" , API_key)
     
     register = select_all()  
     respuesta= {}
 
     if request.method == "GET":
-        return render_template ("purchase.html", all_cryp = all_crypt, reg=register, rat=rate, resp_request = respuesta)
+        return render_template ("purchase.html", all_cryp = all_crypt, reg=register, rat=0.2, resp_request = respuesta, pre_to="")
     else :
         if request.form['button'] == 'calculate' : 
             q = 000.75666
             pu = float (request.form['from_input_q'])/q
 
             respuesta = {
-                'from_select':q,
+                'from_select': request.form['from_select'] ,
                 'from_input_q': request.form['from_input_q'],
                 'to_select': request.form['to_select'] ,
-                #'to_labl_q': request.form['to_labl_q'],
+                'to_labl_q': str(q),
                 'to_label_pu':pu                
             }
-            return render_template('purchase.html',resp_request = respuesta)
+
+            all_crypt = ["EUR","BTC","ETH","USDT", "BNB" , "XRP" , "ADA", "SOL", "DOT", "MATIC"]
+
+
+            return render_template('purchase.html',resp_request = respuesta, all_crypt=all_crypt, pre_to=request.form['to_select'])
         else :
             return "guardar en base de datos sqlite"
-
-
 
 
 @app.route("/status")
