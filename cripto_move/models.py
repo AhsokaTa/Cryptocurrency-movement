@@ -31,4 +31,23 @@ class CoinApiIO:
         
         return rate
     
+    def tradeoCrypto(self, q ,crypto_fom, crypto_to, API_key):
+        q = float(q)    
+
+        crypto_fom="ETH"
+        crypto_to="BTC"  
+        
+        response = requests.get(f'https://rest.coinapi.io/v1/exchangerate/{crypto_fom}/{crypto_to}?apikey={API_key}')
+        crypto_fom="ETH"
+        crypto_to="BTC"
+
+        if response.status_code != 200:
+            raise Exception("Error response code")
+        r = response.json()
+        rate = r["rate"]
+        rate = float(rate)
+        cambio = q/rate  
+
+        return cambio
+    
 

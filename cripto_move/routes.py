@@ -34,31 +34,36 @@ def purchase():
                 my_crypto.append(currency)
 
 ###########################################################################################################
-                           
+                         
     cryptocurrencies = CoinApiIO(all_crypt)   
     my_cryptocurrencies = cryptocurrencies.getCryptocurrencies(API_key) #todas las cripto
     
+    
     respuesta= {}
 
-    if request.method == "GET":
-        return render_template ("purchase.html", all_cryp = all_crypt,my_cripto=my_crypto, mis_cripto=my_cryptocurrencies, register=my_crypt_register, rat=0.2, resp_request = respuesta, pre_to="")
+    if request.method == "GET":     
+        
+        return render_template("purchase.html", my_crypto_list = my_crypto, all_crypt_list = all_crypt, quantity_coins = "exchange rate",q_to = "Insert quantity",pre_from = "EUR",pre_to = "Select cryptocurrency")
+
     else :
         if request.form['button'] == 'calculate' : 
+
+            """
             q = 000.75666
             pu = float (request.form['from_input_q'])/q
-
-            respuesta = {
-                'from_select': request.form['from_select'] ,
-                'from_input_q': request.form['from_input_q'],
-                'to_select': request.form['to_select'] ,
-                'to_labl_q': str(q),
-                'to_label_pu':pu                
-            }
-
-            all_crypt = ["EUR","BTC","ETH","USDT", "BNB" , "XRP" , "ADA", "SOL", "DOT", "MATIC"]
-
-            return render_template('purchase.html',resp_request = respuesta, all_crypt=all_crypt, pre_to=request.form['to_select'])
+            """
+            
+            respuesta = { 
+                            "pre_from" : request.form["from_select"], 
+                            "pre_q" : request.form["quantity"],
+                            "pre_to" : request.form["to_select"]
+                        }
+            value = cryptocurrencies.tradeoCrypto(request.form["quantity"], request.form["from_select"], request.form["to_select"], API_key)
+                                   
+            return render_template('purchase.html',quantity_coins = value, q_to = request.form["quantity"], pre_from = request.form["from_select"], pre_to = request.form["to_select"] )  
+        
         else :
+            
             return "guardar en base de datos sqlite"
 
 

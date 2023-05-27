@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block pageBase %}
+
+<h1>Purchase of cryptocurrencies</h1>
+
+<br>Todas las cripto son {{all_cryp}} 
+<br> mis cripto son : {{my_cripto}}
+<br>from_ es  : {{from_s}}
+
+<div style="display: flex; justify-content: space-between;">
+    <div style="width: 90%;">
+        <form action="/purchase" method="POST">
+            <div class="grid">
+                <div>
+                    <label for="from">From</label>
+                    <select name="from_select" value="{{request.from_select}}" placeholder="{{pre_from}}"required>
+                        <option value="EUR">EUR</option>                             
+                            {% for item in my_cripto %}
+                                <option value="{{ item }}">{{ item }}</option>                
+                            {% endfor %}    
+                            <option  placeholder="{{ pre_from }}" selected>{{ pre_from }}</option>                             
+                    </select>     
+                    <label for="Q2">Q</label><br>
+                    <input id="cantidad" name="quantity" placeholder="{{ q_to }}"  value="{{q_to}}" type="number" required>   
+                                     
+                </div>
+                <div>          
+                    <label for="to">To</label>
+                    <select name="to_select" value="{{ request.to_select }}" required>                     
+                    
+                        {% for item in all_cryp %}
+                            <option value="{{ item }}" required >{{ item }}</option>
+                        {% endfor %}                   
+                        <option value="{{ pre_to }}" placeholder="{{pre_to}}" required >{{ pre_to }}</option>
+                    </select>                                
+                    <br>  
+                    <div><input type="submit" name="button" value="save" style="margin-left: 20px; width: 70px; height: 70px;"></div>                    
+                  </div>
+            </div>             
+            <input type="submit" name="button" value="calculate">
+        </form>
+    </div>
+</div>
+ 
+{% endblock %}
