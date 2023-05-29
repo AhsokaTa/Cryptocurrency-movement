@@ -60,19 +60,38 @@ class Conexion:
 
             return dictionary_list
     
-    def add_record():
-        pass
 
     def add_record(registroForm):
         conectarNuevo = Conexion("INSERT INTO movements(date,time,moneda_from, cantidad_from, moneda_to,cantidad_to) VALUES(?,?,?,?,?,?)", registroForm)
         conectarNuevo.con.commit()
         conectarNuevo.con.close()
 
+    def invested():
+        """
+        Invertido: Es el total de euros con el que se han comprado criptos. Se calcula como 
+        la suma de la columna Cantidad_from de todos los movimientos cuya Moneda_from es EUROS.
+        """
+        connect_to = Conexion("SELECT SUM(Cantidad_from) AS total_cantidad_from FROM movements WHERE moneda_from = 'EUR'") 
 
+        rows = connect_to.res.fetchall()
+        col = connect_to.res.description
 
+        dictionary_list = []
 
+        for row in rows:
+            dictionary = dict(zip([column[0] for column in col], row))
+            dictionary_list.append(dictionary)
 
+        connect_to.con.close()
+
+        return dictionary_list if dictionary_list else []
         
 
 
-        
+
+
+
+            
+
+
+            

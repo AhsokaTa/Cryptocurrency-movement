@@ -70,4 +70,7 @@ def purchase():
 
 @app.route("/status")
 def status():
-    return render_template("status.html")
+    
+    euros_invested=Conexion.invested()
+
+    return render_template("status.html", invested = euros_invested)
