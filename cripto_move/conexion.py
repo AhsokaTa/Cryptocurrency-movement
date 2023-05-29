@@ -30,8 +30,7 @@ class Conexion:
                 for c in col : 
                     diccionary[c[0]] = f [position]
                     position += 1
-                dictionary_list.append(diccionary)
-            
+                dictionary_list.append(diccionary)            
             connect_to.con.close()
 
             return dictionary_list
@@ -41,8 +40,7 @@ class Conexion:
         dictionary_list = []
         if ("select count(*) FROM tabla") == 0:
             return dictionary_list
-        else:
-            #future improvement: sort by a specific field
+        else:           
             connect_to=Conexion("SELECT DISTINCT moneda_from, moneda_to FROM movements") 
 
             rows = connect_to.res.fetchall()
@@ -57,8 +55,7 @@ class Conexion:
                 for c in col : 
                     diccionary[c[0]] = f [position]
                     position += 1
-                dictionary_list.append(diccionary)
-            
+                dictionary_list.append(diccionary)            
             connect_to.con.close()
 
             return dictionary_list
