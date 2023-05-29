@@ -71,6 +71,8 @@ def purchase():
 @app.route("/status")
 def status():
     
-    euros_invested=Conexion.invested()
-
-    return render_template("status.html", invested = euros_invested)
+    euros_invested = Conexion.invested()
+    recover = Conexion.recovered()
+    #purchase_value = (euros_invested - recover)    
+    #Current value in euros
+    return render_template("status.html", invested = euros_invested, recover_e=recover)

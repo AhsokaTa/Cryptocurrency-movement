@@ -87,9 +87,28 @@ class Conexion:
         return dictionary_list if dictionary_list else []
         
 
+    def recovered():
+        """
+        Recuperado: Es el total de euros obtenidos con la venta de cualquier cripto (registrada en nuestro sistema). Se calcula como 
+        la suma de la columna Cantidad_to de todos los movimientos cuya Moneda_to es EUROS.
+        """
+        connect_to = Conexion("SELECT SUM(cantidad_to) AS total_euros_obtenidos FROM movements WHERE moneda_to = 'EUR'") 
 
+        rows = connect_to.res.fetchall()
+        col = connect_to.res.description
 
+        dictionary_list = []
 
+        for row in rows:
+            dictionary = dict(zip([column[0] for column in col], row))
+            dictionary_list.append(dictionary)
+
+        connect_to.con.close()
+
+        return dictionary_list if dictionary_list else []
+
+    def current_value_euros():
+        pass
 
             
 
