@@ -43,7 +43,7 @@ class Conexion:
             return dictionary_list
         else:
             #future improvement: sort by a specific field
-            connect_to=Conexion("SELECT DISTINCT moneda_from FROM movements") 
+            connect_to=Conexion("SELECT DISTINCT moneda_from, moneda_to FROM movements") 
 
             rows = connect_to.res.fetchall()
             col = connect_to.res.description

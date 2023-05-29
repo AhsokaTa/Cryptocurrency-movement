@@ -2,7 +2,7 @@
 {% block pageBase %}
 
 <h1>Purchase of cryptocurrencies</h1>
-
+{{fecha}}
 <form action="/purchase" method="POST">
   <div class="form-columns">
     <div class="form-column" style="float: left; width: 50%;">
@@ -17,7 +17,7 @@
       </label>
       
       <label for="q_to">
-        q : 
+        Quantity (q) "Cuantas monedas 'from to' quiero comprar": 
         <input value="{{q_to}}" type="number"  id="cantidad" name="quantity" placeholder="{{q_to}}" required style="width: 100%;">
       </label>
       
@@ -36,7 +36,7 @@
       </label>
       
       <label for="Q">
-        rate
+       el precio fromTo(rate)
         <input value="{{quantity_coins}}" type="text"  id="precompra" name="quantity_change" placeholder="{{quantity_coins}}" readonly style="width: 100%;">
       </label>
 
@@ -44,7 +44,7 @@
         PU
         <input value="{{unit_price}}" type="text"  id="unit_price" name="unit_price" placeholder="{{unit_price}}" readonly style="width: 100%;">
       </label>
-      
+      Buy
       <input type="submit" name="button" value="save" style="width: 100%;">
     </div>
   </div>
