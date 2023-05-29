@@ -5,10 +5,10 @@
 
 <form action="/purchase" method="POST">
   <div class="form-columns">
-    <div class="form-column">
+    <div class="form-column" style="float: left; width: 50%;">
       <label for="from">
         From 
-        <select name="from_select" value="{{request.from_select}}" placeholder="{{pre_from}}" required style="width: 30%;">
+        <select name="from_select" value="{{request.from_select}}" placeholder="{{pre_from}}" required style="width: 100%;">
           {% for item in my_crypto_list %}
           <option value="{{item}}">{{item}}</option>
           {% endfor %}
@@ -18,16 +18,16 @@
       
       <label for="q_to">
         q : 
-        <input value="{{q_to}}" type="number"  id="cantidad" name="quantity" placeholder="{{q_to}}" required style="width: 30%;">
+        <input value="{{q_to}}" type="number"  id="cantidad" name="quantity" placeholder="{{q_to}}" required style="width: 100%;">
       </label>
       
-      <input type="submit" name="button" value="calculate" class="secondary" style="width: 10%;">
+      <input type="submit" name="button" value="calculate" class="secondary" style="width: 100%;">
     </div>
     
-    <div class="form-column">
+    <div class="form-column" style="float: left; width: 50%;">
       <label for="to">
         To
-        <select name="to_select" value="{{request.to_select}}" required style="width: 30%;">
+        <select name="to_select" value="{{request.to_select}}" required style="width: 100%;">
           {% for item in all_crypt_list %}
           <option value="{{item}}" required>{{item}}</option>
           {% endfor %}
@@ -37,15 +37,15 @@
       
       <label for="Q">
         rate
-        <input value="{{quantity_coins}}" type="text"  id="precompra" name="quantity_change" placeholder="{{quantity_coins}}" readonly style="width: 30%;">
+        <input value="{{quantity_coins}}" type="text"  id="precompra" name="quantity_change" placeholder="{{quantity_coins}}" readonly style="width: 100%;">
       </label>
 
       <label for="pu">
         PU
-        <label value="{{unit_price}}" type="text"  id="unit_price" name="unit_price" placeholder="{{unit_price}}" readonly style="width: 30%;"></label>
+        <input value="{{unit_price}}" type="text"  id="unit_price" name="unit_price" placeholder="{{unit_price}}" readonly style="width: 100%;">
       </label>
       
-      <input type="submit" name="button" value="save" style="width: 10%;">
+      <input type="submit" name="button" value="save" style="width: 100%;">
     </div>
   </div>
 </form>
