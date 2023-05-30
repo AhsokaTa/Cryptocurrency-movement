@@ -34,10 +34,9 @@ def purchase():
         for crypto in my_crypt_register:
             if currency == crypto["moneda_to"]:
                 my_crypto.append(currency)
+   
+    cryptocurrencies = CoinApiIO(all_crypt)  
 
-    #Tngo que filtrar my_crypto para que no las saque repetidas y las guardarlo en my_crypto_list que va al comboBox
-    cryptocurrencies = CoinApiIO(all_crypt)   
-    #my_cryptocurrencies = cryptocurrencies.getCryptocurrencies(API_key)    
     if request.method == "GET":     
        
         return render_template("purchase.html", my_crypto_list = my_crypto, all_crypt_list = all_crypt, quantity_coins = "exchange rate",q_to = "Insert quantity",pre_from = "EUR",pre_to = "Select cryptocurrency")
@@ -56,12 +55,12 @@ def purchase():
                 pre_to = request.form["to_select"]
                 date_select=datetime.now().date()
                 hora_select=datetime.now().strftime("%H:%M:%S")
-                
+                """ modificacion 16:40
                 if request.form["to_select"] == "EUR":
                     valor = cryptocurrencies.crytocurrenciesValue(pre_from, API_key)  
                     
                 else:
-                    valor = cryptocurrencies.crytocurrenciesValue(pre_to, API_key)
+                    valor = cryptocurrencies.crytocurrenciesValue(pre_to, API_key)"""
 
                 Conexion.add_record([date_select, hora_select, pre_from, pre_q, pre_to, cryptocurrencies.tradeoCrypto(pre_q, pre_from, pre_to , API_key)]) 
                          
@@ -73,7 +72,10 @@ def status():
     
     euros_invested = Conexion.invested()
     recover = Conexion.recovered()
-    recover= f"{recover:.7f}"
-    #purchase_value = (euros_invested - recover)    
-    #Current value in euros
-    return render_template("status.html", invested = euros_invested, recover_e=recover)
+
+    int_reco=recover
+    recover_str= f"{recover:.7f}"
+
+    purchase_va=recover-int_reco
+   
+    return render_template("status.html", invested = euros_invested, recover_str=recover_str, purchase_va=purchase_va)
