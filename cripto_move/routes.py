@@ -73,6 +73,7 @@ def status():
     
     euros_invested = Conexion.invested()
     recover = Conexion.recovered()
+    recover= f"{recover:.7f}"
     #purchase_value = (euros_invested - recover)    
     #Current value in euros
     return render_template("status.html", invested = euros_invested, recover_e=recover)
