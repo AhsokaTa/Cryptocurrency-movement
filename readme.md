@@ -34,4 +34,4 @@ The library used in Flask https://flask.palletsprojects.com/en/2.2.x/
 # Command to run the server in debug mode, enabling real-time changes
 ```flask --app main --debug run```
 
-## Try it, May the force be with you
+# Try it, May the force be with you

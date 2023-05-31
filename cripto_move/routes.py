@@ -14,7 +14,7 @@ def index():
     my_crypt_register =Conexion.select_all()     
 
     if not my_crypt_register:  
-        return render_template("index.html", message="empty record")
+        return render_template("index.html", message="Sin movimientos, empty record")
     else:
         return render_template("index.html", reg=my_crypt_register)
     
@@ -60,7 +60,8 @@ def purchase():
                     valor = cryptocurrencies.crytocurrenciesValue(pre_from, API_key)  
                     
                 else:
-                    valor = cryptocurrencies.crytocurrenciesValue(pre_to, API_key)"""
+                    valor = cryptocurrencies.crytocurrenciesValue(pre_to, API_key)
+                """
 
                 Conexion.add_record([date_select, hora_select, pre_from, pre_q, pre_to, cryptocurrencies.tradeoCrypto(pre_q, pre_from, pre_to , API_key)]) 
                          
@@ -73,9 +74,9 @@ def status():
     euros_invested = Conexion.invested()
     recover = Conexion.recovered()
 
-    int_reco=recover
-    recover_str= f"{recover:.7f}"
+    #int_reco=recover
+    #recover_str= f"{recover:.7f}"
 
-    purchase_va=recover-int_reco
+    purchase_va=euros_invested-recover
    
-    return render_template("status.html", invested = euros_invested, recover_str=recover_str, purchase_va=purchase_va)
+    return render_template("status.html", invested = euros_invested, recover=recover,purchase_va=purchase_va)
