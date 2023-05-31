@@ -7,20 +7,45 @@
     <title>Cryptocurrency movement</title> 
     <link rel="stylesheet" href="/static/css/pico.css"> 
     <link rel="stylesheet" href="/static/css/styles.css"> 
+    <link rel="stylesheet" href="/static/css/cripto.css">
+
+    <script type='text/javascript'>
+        $(window).load(function(){
+        var valorToSelect = document.getElementById("to_select").value;
+      
+         if(valorToSelect !='Select cryptocurrency') {        
+              document.getElementById("btBuy").disabled = false;
+            } 
+      
+          $('#to_select').change(function() {
+            if($(this).val() !='Select cryptocurrency') {        
+              document.getElementById("btBuy").disabled = false;
+              document.getElementById("btCalculate").disabled = false;
+              
+            } else {
+              document.getElementById("btBuy").disabled = true;
+              document.getElementById("btCalculate").disabled = true;
+            }   
+          });
+        });
+        
+        </script>
 </head> 
 <body> 
     <header> 
         <nav aria-label="breadcrumb" class="container">
             <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/purchase">Purchase</a></li>
+              <li><a href="/" >Index</a></li>
+              <li><a href="/purchase" >Purchase</a></li>
               <li><a href="/status">Status</a></li>             
             </ul>
           </nav>
          
     </header>
     <section class="container">
-       {% block pageBase%} {# here will go my HTML template #}
+       {% block pageBase%} 
+
+       {# here will go my HTML template #}
  
        {% endblock %} 
     </section> 

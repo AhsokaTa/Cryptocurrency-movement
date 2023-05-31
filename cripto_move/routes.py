@@ -1,5 +1,5 @@
 from cripto_move import app
-from flask import render_template, request
+from flask import render_template, request, flash
 from cripto_move.models import *
 from cripto_move.conexion import *
 from config import API_key
@@ -64,7 +64,7 @@ def purchase():
                 """
 
                 Conexion.add_record([date_select, hora_select, pre_from, pre_q, pre_to, cryptocurrencies.tradeoCrypto(pre_q, pre_from, pre_to , API_key)]) 
-                         
+               # flash("Movimiento registrado correactamente!!!")        
             return index()
 
 
@@ -76,7 +76,9 @@ def status():
 
     #int_reco=recover
     #recover_str= f"{recover:.7f}"
-
+    #recover = f"{recover:.4f}"
+    print(type (recover))
     purchase_va=euros_invested-recover
-   
+    purchase_va =   f"{purchase_va:.4f}"
+    
     return render_template("status.html", invested = euros_invested, recover=recover,purchase_va=purchase_va)
