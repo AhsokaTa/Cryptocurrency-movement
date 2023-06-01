@@ -1,3 +1,6 @@
 #API_key ="93D86494-DCE3-4077-A9F4-5C36C1D86E34" 
 #API_key ="ABB72C97-8169-406E-B987-0066905629BD"  
 API_key ="CE5AD4AA-AD40-4990-84DE-653810100224" 
+    
+#all the cryptocurrencies 
+all_crypt = ["EUR","BTC","ETH","USDT", "BNB" , "XRP" , "ADA", "SOL", "DOT", "MATIC"]

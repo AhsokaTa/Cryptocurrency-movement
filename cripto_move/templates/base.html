@@ -35,9 +35,23 @@
     <header> 
         <nav aria-label="breadcrumb" class="container">
             <ul>
-              <li><a href="/" >Index</a></li>
-              <li><a href="/purchase" >Purchase</a></li>
-              <li><a href="/status">Status</a></li>             
+              {% if breadcrumb == "index" %}
+              <li><u class="breadcrumb-item" style="cursor: pointer;">index </u> </li>
+              {% else %}
+              <li><a href="/" >index</a></li>
+              {% endif %}
+
+              {% if breadcrumb == "purchase" %}
+              <li><u class="breadcrumb-item" style="cursor: pointer;">purchase </u> </li>
+              {% else %}
+              <li><a href="/purchase" >purchase</a></li>
+              {% endif %}
+
+              {% if breadcrumb == "status" %}
+              <li><u class="breadcrumb-item" style="cursor: pointer;">status </u> </li>
+              {% else %}
+              <li><a href="/status" >status</a></li>
+              {% endif %}           
             </ul>
           </nav>
          
