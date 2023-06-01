@@ -6,6 +6,13 @@ from config import API_key
 
 from datetime import datetime
 
+"""
+desactivar /index, /purchase, /status 
+
+si le da al boton calcular o al boton saver, consultar a BASE DATOS la suma de monedas 
+con las que quiere comprar
+
+"""
 
 @app.route("/", methods=["GET"])
 def index():    
@@ -26,7 +33,7 @@ def purchase():
     all_crypt = ["EUR","BTC","ETH","USDT", "BNB" , "XRP" , "ADA", "SOL", "DOT", "MATIC"]
 
     #register, my cryptocurrencies in dictionary format (as it is returned)
-    my_crypt_register = Conexion.select_all_unique()#OJOO AQUI NO PUEDO CAMBIAR A SELECTALL UNIQUE 
+    my_crypt_register = Conexion.select_all_unique()
     
     #save my cryptocurrencies from the database into the list my_cripto
     my_crypto = []
@@ -38,7 +45,7 @@ def purchase():
     cryptocurrencies = CoinApiIO(all_crypt)  
 
     if request.method == "GET":     
-       
+        
         return render_template("purchase.html", my_crypto_list = my_crypto, all_crypt_list = all_crypt, quantity_coins = "exchange rate",q_to = "Insert quantity",pre_from = "EUR",pre_to = "Select cryptocurrency")
 
     else :
