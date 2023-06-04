@@ -70,15 +70,15 @@ def status():
     purchase_va = euros_invested-recover
     purchase_va =   f"{purchase_va:.4f}"
 
-    cartera=cartera_de_criptos()
+    wallet = cartera_de_criptos()
 
     cryptocurrencies = CoinApiIO(all_crypt)
 
-    ganancia_cripto=0
+    crypto_gain=0
 
-    for mon in cartera:
+    for mon in wallet :
         valor_moneda = cryptocurrencies.crytocurrenciesValue(mon['moneda'], API_key)
-        ganancia_cripto += mon['total_cripto'] * valor_moneda
-        
+        crypto_gain += mon['total_cripto'] * valor_moneda    
+       
     return render_template("status.html", invested = euros_invested, recover=recover,purchase_va=purchase_va, 
-                           breadcrumb=breadcrumb, ganancia_cripto=ganancia_cripto)
+                           breadcrumb=breadcrumb, crypto_gain=crypto_gain)
