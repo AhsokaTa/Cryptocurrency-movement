@@ -3,6 +3,11 @@
     width: 50%;
 }
 
+.breadcrumb-item{
+  color: #45c30b
+  
+  
+}
 /* Teal Light scheme (Default) */
 /* Can be forced with data-theme="light" */
 [data-theme="light"],

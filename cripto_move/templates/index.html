@@ -2,11 +2,11 @@
 {% block pageBase %}
 <h1>cryptocurrency movement</h1>
 
-<h2> {{message}} </h2>
+<h2> {{message}} </h2> 
 
-    <table style="width:100%">
-        <thead> 
-            <tr>
+    <table style="width:100%"> 
+        <thead>  
+            <tr> 
                 <th>Date</th>
                 <th>Time</th>
                 <th>From</th>
@@ -15,11 +15,11 @@
                 <th>Q</th>
                 <th>PU</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for item in reg %}
-            <tr>                
-                <td>{{item.date}}</td>
+        </thead> 
+        <tbody> 
+        {% for item in reg %}   
+            <tr>                   
+                <td>{{item.date}}</td> 
                 <td>{{item.time}}</td>
                 <td>{{item.moneda_from}}</td>
                 <td>{{item.cantidad_from}}</td>
@@ -27,7 +27,7 @@
                 <td>{{item.cantidad_to}}</td>
                 <td>{{item.cantidad_from / item.cantidad_to}}</td>
             </tr>
-        {% endfor %}
+        {% endfor %} 
         </tbody>
     </table>
-  {% endblock %}
+  {% endblock %} 
