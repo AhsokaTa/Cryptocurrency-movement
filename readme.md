@@ -1,4 +1,4 @@
-# Web Application Cryptocurrency Movement Registration	
+# Web Application Cryptocurrency Movement Registration	 
 
 Program made in Python with the Flask framework, Web Application Cryptocurrency Movement Registration
 
