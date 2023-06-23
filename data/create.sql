@@ -7,4 +7,4 @@ CREATE TABLE "movements" (
 	"moneda_to"	TEXT NOT NULL,
 	"cantidad_to"	REAL NOT NULL,
 	PRIMARY KEY("id" AUTOINCREMENT)
-	)
+	)  
